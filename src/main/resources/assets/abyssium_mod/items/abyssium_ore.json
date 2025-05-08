@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "abyssium_mod:item/abyssium_ore"
+    "model": "abyssium_mod:block/abyssium_ore"
   }
 }

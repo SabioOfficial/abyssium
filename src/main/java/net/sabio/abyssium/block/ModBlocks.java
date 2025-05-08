@@ -22,22 +22,20 @@ public class ModBlocks {
             "abyssium_ore",
             Block::new,
             AbstractBlock.Settings.create().sounds(BlockSoundGroup.ANCIENT_DEBRIS),
+            60.0f, // Strength value
             true
     );
 
-    private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {
-        // Create a registry key for the block
+    private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, float strength, boolean shouldRegisterItem) {
         RegistryKey<Block> blockKey = keyOfBlock(name);
-        // Create the block instance
+
+        // Apply strength to settings
+        settings = settings.strength(strength);
+
         Block block = blockFactory.apply(settings.registryKey(blockKey));
 
-        // Sometimes, you may not want to register an item for the block.
-        // Eg: if it's a technical block like `minecraft:moving_piston` or `minecraft:end_gateway`
         if (shouldRegisterItem) {
-            // Items need to be registered with a different type of registry key, but the ID
-            // can be the same.
             RegistryKey<Item> itemKey = keyOfItem(name);
-
             BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
             Registry.register(Registries.ITEM, itemKey, blockItem);
         }
