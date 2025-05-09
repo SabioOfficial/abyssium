@@ -13,7 +13,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.sabio.abyssium.Abyssium;
-import net.sabio.abyssium.item.ModItems;
 
 import java.util.function.Function;
 
@@ -31,6 +30,9 @@ public class ModBlocks {
 
         // Apply strength to settings
         settings = settings.strength(strength);
+
+        // *** Add this line to require a tool for harvesting ***
+        settings = settings.requiresTool();
 
         Block block = blockFactory.apply(settings.registryKey(blockKey));
 
