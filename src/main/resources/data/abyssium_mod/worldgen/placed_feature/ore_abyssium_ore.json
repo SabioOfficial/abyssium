@@ -1,5 +1,5 @@
 {
-  "feature": "tutorial:ore_abyssium_ore",
+  "feature": "abyssium_mod:ore_abyssium_ore",
   "placement": [
     {
       "type": "minecraft:count",
