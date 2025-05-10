@@ -25,6 +25,14 @@ public class ModBlocks {
             true
     );
 
+    public static final Block BLOCK_OF_ABYSSIUM = register(
+            "block_of_abyssium",
+            Block::new,
+            AbstractBlock.Settings.create().sounds(BlockSoundGroup.NETHERITE),
+            80.0f, // Strength value
+            true
+    );
+
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, float strength, boolean shouldRegisterItem) {
         RegistryKey<Block> blockKey = keyOfBlock(name);
 
@@ -56,5 +64,8 @@ public class ModBlocks {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL)
                 .register((itemGroup) -> itemGroup.add(ModBlocks.ABYSSIUM_ORE));
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS)
+                .register((itemGroup) -> itemGroup.add(ModBlocks.BLOCK_OF_ABYSSIUM));
     }
 }
