@@ -23,6 +23,6 @@ public class Abyssium implements ModInitializer {
     public void onInitialize() {
         ModItems.initialize();
         ModBlocks.initialize();
-        BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(), GenerationStep.Feature.UNDERGROUND_ORES, CUSTOM_ORE_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, CUSTOM_ORE_PLACED_KEY);
     }
 }

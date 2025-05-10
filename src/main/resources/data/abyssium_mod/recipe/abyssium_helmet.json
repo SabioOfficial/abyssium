@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "# #"
+    ],
+    "key": {
+        "#": "abyssium_mod:abyssium"
+    },
+    "result": {
+        "id": "abyssium_mod:abyssium_helmet",
+        "count": 1
+    }
+}

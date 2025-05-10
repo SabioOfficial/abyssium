@@ -9,7 +9,7 @@
           "Name": "abyssium_mod:abyssium_ore"
         },
         "target": {
-          "block": "minecraft:netherrack",
+          "block": "minecraft:end_stone",
           "predicate_type": "minecraft:block_match"
         }
       }
