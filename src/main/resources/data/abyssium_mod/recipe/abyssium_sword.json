@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        " # ",
+        " ! "
+    ],
+    "key": {
+        "#": "abyssium_mod:abyssium",
+        "!": "minecraft:stick"
+    },
+    "result": {
+        "id": "abyssium_mod:abyssium_sword",
+        "count": 1
+    }
+}

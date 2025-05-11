@@ -6,5 +6,11 @@
   "item.abyssium_mod.abyssium_helmet": "Abyssium Helmet",
   "item.abyssium_mod.abyssium_chestplate": "Abyssium Chestplate",
   "item.abyssium_mod.abyssium_leggings": "Abyssium Leggings",
-  "item.abyssium_mod.abyssium_boots": "Abyssium Boots"
+  "item.abyssium_mod.abyssium_boots": "Abyssium Boots",
+
+  "item.abyssium_mod.abyssium_sword": "Abyssium Sword",
+  "item.abyssium_mod.abyssium_axe": "Abyssium Axe",
+  "item.abyssium_mod.abyssium_pickaxe": "Abyssium Pickaxe",
+  "item.abyssium_mod.abyssium_shovel": "Abyssium Shovel",
+  "item.abyssium_mod.abyssium_hoe": "Abyssium Hoe"
 }
