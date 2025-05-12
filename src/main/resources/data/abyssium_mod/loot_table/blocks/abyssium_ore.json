@@ -6,14 +6,15 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "abyssium_mod:abyssium_ingot"
+          "name": "abyssium_mod:abyssium_shard"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ]
+      ],
+      "bonus_rolls": 1
     }
   ]
 }

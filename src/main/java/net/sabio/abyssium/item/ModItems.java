@@ -17,6 +17,7 @@ import static net.sabio.abyssium.item.ModToolMaterials.ABYSSIUM_TOOL_MATERIAL;
 
 public class ModItems {
     public static final Item ABYSSIUM_INGOT = register("abyssium_ingot", Item::new, new Item.Settings());
+    public static final Item ABYSSIUM_SHARD = register("abyssium_shard", Item::new, new Item.Settings());
 
     // Armor Items
 
@@ -48,7 +49,10 @@ public class ModItems {
 
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
-                .register(itemGroup -> itemGroup.add(ModItems.ABYSSIUM_INGOT));
+                .register(itemGroup -> {
+                    itemGroup.add(ModItems.ABYSSIUM_SHARD);
+                    itemGroup.add(ModItems.ABYSSIUM_INGOT);
+                });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT)
                 .register((itemGroup) -> {

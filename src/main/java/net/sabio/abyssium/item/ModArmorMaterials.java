@@ -15,7 +15,7 @@ import net.sabio.abyssium.Abyssium;
 import java.util.Map;
 
 public class ModArmorMaterials {
-    public static final int BASE_DURABILITY = 45;
+    public static final int BASE_DURABILITY = 50;
 
     public static final TagKey<Item> REPAIRS_ABYSSIUM_ARMOR = TagKey.of(RegistryKeys.ITEM, Identifier.of("minecraft", "repairs_abyssium_armor"));
 
