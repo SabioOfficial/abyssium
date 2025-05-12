@@ -73,6 +73,15 @@ public class ModItems {
                     itemGroup.add(ModItems.ABYSSIUM_LEGGINGS);
                     itemGroup.add(ModItems.ABYSSIUM_BOOTS);
                     itemGroup.add(ModItems.ABYSSIUM_SWORD);
+                    itemGroup.add(ModItems.ABYSSIUM_AXE);
+                });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS)
+                .register((itemGroup) -> {
+                    itemGroup.add(ModItems.ABYSSIUM_AXE);
+                    itemGroup.add(ModItems.ABYSSIUM_PICKAXE);
+                    itemGroup.add(ModItems.ABYSSIUM_SHOVEL);
+                    itemGroup.add(ModItems.ABYSSIUM_HOE);
                 });
     }
 }
