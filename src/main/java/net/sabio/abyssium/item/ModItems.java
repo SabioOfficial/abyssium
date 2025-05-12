@@ -1,33 +1,22 @@
 package net.sabio.abyssium.item;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BannerPatternsComponent;
-import net.minecraft.component.type.BlocksAttacksComponent;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.sabio.abyssium.Abyssium;
 import net.minecraft.item.Item;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 import static net.sabio.abyssium.item.ModToolMaterials.ABYSSIUM_TOOL_MATERIAL;
 
 public class ModItems {
-    public static final Item ABYSSIUM = register("abyssium", Item::new, new Item.Settings());
+    public static final Item ABYSSIUM_INGOT = register("abyssium_ingot", Item::new, new Item.Settings());
 
     // Armor Items
 
@@ -57,14 +46,9 @@ public class ModItems {
         return item;
     }
 
-    public static final RegistryKey<ItemGroup> CUSTOM_ITEM_GROUP_KEY = RegistryKey.of(
-            Registries.ITEM_GROUP.getKey(), Identifier.of(Abyssium.MOD_ID, "item_group"));
-
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS)
-                .register((itemGroup) -> {
-                    itemGroup.add(ModItems.ABYSSIUM);
-                });
+                .register(itemGroup -> itemGroup.add(ModItems.ABYSSIUM_INGOT));
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT)
                 .register((itemGroup) -> {

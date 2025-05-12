@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "abyssium_mod:abyssium"
+          "name": "abyssium_mod:abyssium_ingot"
         }
       ],
       "conditions": [
