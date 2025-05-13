@@ -3,11 +3,11 @@
   "id": "abyssium",
   "version": "${version}",
   "name": "Abyssium",
-  "description": "",
+  "description": "Add ores to the End!",
   "authors": [],
   "contact": {},
   "license": "GPL-3.0",
-  "icon": "assets/abyssium/icon.png",
+  "icon": "assets/abyssium_mod/icon.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
