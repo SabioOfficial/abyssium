@@ -1,13 +1,20 @@
 package net.sabio.abyssium.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.EquippableComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import net.minecraft.util.Unit;
 import net.sabio.abyssium.Abyssium;
 import net.minecraft.item.Item;
 
@@ -18,6 +25,9 @@ import static net.sabio.abyssium.item.ModToolMaterials.ABYSSIUM_TOOL_MATERIAL;
 public class ModItems {
     public static final Item ABYSSIUM_INGOT = register("abyssium_ingot", Item::new, new Item.Settings());
     public static final Item ABYSSIUM_SHARD = register("abyssium_shard", Item::new, new Item.Settings());
+    // public static final Item ABYSSIUM_UPGRADE_SMITHING_TEMPLATE = register(
+            // "abyssium_upgrade_smithing_template", ModSmithingTemplateItem::createAbyssiumUpgrade, new Item.Settings().rarity(Rarity.UNCOMMON)
+    // );
 
     // Armor Items
 
@@ -38,6 +48,26 @@ public class ModItems {
     );
     public static final Item ABYSSIUM_HOE = register(
             "abyssium_hoe", settings -> new HoeItem(ABYSSIUM_TOOL_MATERIAL, -5.0F, 0.0F, settings), new Item.Settings().fireproof()
+    );
+
+    // Utility
+
+    public static final Item ABYSSIUM_PLATED_ELYTRA = register(
+            "abyssium_plated_elytra",
+            Item::new,
+            new Item.Settings()
+                    .maxDamage(1728)
+                    .rarity(Rarity.EPIC)
+                    .component(DataComponentTypes.GLIDER, Unit.INSTANCE)
+                    .component(
+                            DataComponentTypes.EQUIPPABLE,
+                            EquippableComponent.builder(EquipmentSlot.CHEST)
+                                    .equipSound(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
+                                    .model(EquipmentAssetKeys.ELYTRA)
+                                    .damageOnHurt(false)
+                                    .build()
+                    )
+                    .repairable(ABYSSIUM_INGOT)
     );
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
@@ -70,6 +100,7 @@ public class ModItems {
                     itemGroup.add(ModItems.ABYSSIUM_PICKAXE);
                     itemGroup.add(ModItems.ABYSSIUM_SHOVEL);
                     itemGroup.add(ModItems.ABYSSIUM_HOE);
+                    itemGroup.add(ModItems.ABYSSIUM_PLATED_ELYTRA);
                 });
     }
 }
