@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "wings": [
+      {
+        "texture": "abyssium_mod:abyssium_plated_elytra",
+        "use_player_texture": true
+      }
+    ]
+  }
+}

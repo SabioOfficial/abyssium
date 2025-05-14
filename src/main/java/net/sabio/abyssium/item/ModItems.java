@@ -53,7 +53,7 @@ public class ModItems {
     // Utility
 
     public static final Item ABYSSIUM_PLATED_ELYTRA = register(
-            "abyssium_plated_elytra",
+            "abyssium_plated_elytra.json",
             Item::new,
             new Item.Settings()
                     .maxDamage(1728)
