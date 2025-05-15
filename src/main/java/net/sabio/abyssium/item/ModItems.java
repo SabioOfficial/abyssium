@@ -5,7 +5,6 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -53,7 +52,7 @@ public class ModItems {
     // Utility
 
     public static final Item ABYSSIUM_PLATED_ELYTRA = register(
-            "abyssium_plated_elytra.json",
+            "abyssium_plated_elytra",
             Item::new,
             new Item.Settings()
                     .maxDamage(1728)
@@ -63,7 +62,7 @@ public class ModItems {
                             DataComponentTypes.EQUIPPABLE,
                             EquippableComponent.builder(EquipmentSlot.CHEST)
                                     .equipSound(SoundEvents.ITEM_ARMOR_EQUIP_ELYTRA)
-                                    .model(EquipmentAssetKeys.ELYTRA)
+                                    .model(ModEquipmentAssetKeys.ABYSSIUM_PLATED_ELYTRA)
                                     .damageOnHurt(false)
                                     .build()
                     )

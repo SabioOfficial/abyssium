@@ -1,9 +1,16 @@
 {
-  "type": "minecraft:smithing_transform",
-  "addition": "abyssium_mod:abyssium_ingot",
-  "base": "minecraft:elytra",
-  "result": {
-    "id": "abyssium_mod:abyssium_plated_elytra"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#V#",
+    "   "
+  ],
+  "key": {
+    "#": "abyssium_mod:abyssium_ingot",
+    "V": "minecraft:elytra"
   },
-  "template": "minecraft:netherite_upgrade_smithing_template"
+  "result": {
+    "id": "abyssium_mod:abyssium_plated_elytra",
+    "count": 1
+  }
 }
