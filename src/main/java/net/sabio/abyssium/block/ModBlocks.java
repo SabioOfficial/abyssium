@@ -21,7 +21,7 @@ public class ModBlocks {
             "abyssium_ore",
             Block::new,
             AbstractBlock.Settings.create().sounds(BlockSoundGroup.ANCIENT_DEBRIS),
-            60.0f, // Strength value
+            40.0f, // Strength value
             true
     );
 
@@ -29,7 +29,7 @@ public class ModBlocks {
             "block_of_abyssium",
             Block::new,
             AbstractBlock.Settings.create().sounds(BlockSoundGroup.NETHERITE),
-            80.0f, // Strength value
+            60.0f, // Strength value
             true
     );
 

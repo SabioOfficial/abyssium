@@ -1,12 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "# #",
-        "###",
-        "###"
+        "## ",
+        "#%#",
+        " # "
     ],
     "key": {
-        "#": "abyssium_mod:abyssium_ingot"
+        "#": "abyssium_mod:abyssium_ingot",
+        "%": "minecraft:netherite_chestplate"
     },
     "result": {
         "id": "abyssium_mod:abyssium_chestplate",
