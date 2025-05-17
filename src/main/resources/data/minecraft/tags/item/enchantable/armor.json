@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "abyssium_mod:abyssium_helmet",
+    "abyssium_mod:abyssium_chestplate",
+    "abyssium_mod:abyssium_leggings",
+    "abyssium_mod:abyssium_boots"
+  ]
+}

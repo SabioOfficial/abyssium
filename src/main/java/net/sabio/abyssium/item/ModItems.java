@@ -15,7 +15,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Unit;
 import net.sabio.abyssium.Abyssium;
-import net.minecraft.item.Item;
 
 import java.util.function.Function;
 
@@ -24,9 +23,6 @@ import static net.sabio.abyssium.item.ModToolMaterials.ABYSSIUM_TOOL_MATERIAL;
 public class ModItems {
     public static final Item ABYSSIUM_INGOT = register("abyssium_ingot", Item::new, new Item.Settings());
     public static final Item ABYSSIUM_SHARD = register("abyssium_shard", Item::new, new Item.Settings());
-    // public static final Item ABYSSIUM_UPGRADE_SMITHING_TEMPLATE = register(
-            // "abyssium_upgrade_smithing_template", ModSmithingTemplateItem::createAbyssiumUpgrade, new Item.Settings().rarity(Rarity.UNCOMMON)
-    // );
 
     // Armor Items
 
