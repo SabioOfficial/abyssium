@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "abyssium_mod:item/abyssium_sword"
+  }
+}

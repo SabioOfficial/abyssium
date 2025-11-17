@@ -1,0 +1,40 @@
+{
+  "item.abyssium_mod.abyssium_shard": "Abyssium Shard",
+  "item.abyssium_mod.abyssium_ingot": "Abyssium Ingot",
+  "item.abyssium_mod.abyssium_ore": "Abyssium Ore",
+  "item.abyssium_mod.block_of_abyssium": "Block of Abyssium",
+
+  "item.abyssium_mod.abyssium_helmet": "Abyssium Helmet",
+  "item.abyssium_mod.abyssium_chestplate": "Abyssium Chestplate",
+  "item.abyssium_mod.abyssium_leggings": "Abyssium Leggings",
+  "item.abyssium_mod.abyssium_boots": "Abyssium Boots",
+
+  "item.abyssium_mod.abyssium_plated_elytra": "Abyssium Plated Elytra",
+
+  "item.abyssium_mod.abyssium_sword": "Abyssium Sword",
+  "item.abyssium_mod.abyssium_axe": "Abyssium Axe",
+  "item.abyssium_mod.abyssium_pickaxe": "Abyssium Pickaxe",
+  "item.abyssium_mod.abyssium_shovel": "Abyssium Shovel",
+  "item.abyssium_mod.abyssium_hoe": "Abyssium Hoe",
+
+  "item.abyssium_mod.abyssium_upgrade_smithing_template": "Abyssium Upgrade",
+
+  "item.abyssium_mod.abyssium_upgrade_smithing_template.equipment_info": "Netherite Equipment & Elytra",
+  "item.abyssium_mod.abyssium_upgrade_smithing_template.ingredient": "Abyssium Ingot",
+  "item.abyssium_mod.abyssium_upgrade_smithing_template.upgrade_description": "Add netherite armor, weapon, tool, or elytra",
+  "item.abyssium_mod.abyssium_upgrade_smithing_template.additions_slot_description": "Add Abyssium Ingot",
+
+  "item.abyssium_mod.infested_end_stone": "Infested End Stone",
+
+  "advancements.end.obtain_abyssium_ore.title": "End-erite?",
+  "advancements.end.obtain_abyssium_ore": "Obtain Abyssium Ore",
+
+  "advancements.end.abyssium_armor.title": "Wearing The Abyss",
+  "advancements.end.abyssium_armor": "Get a full suit of Abyssium armor",
+
+  "advancements.end.abyssium_plated_elytra.title": "Long-term Elytra",
+  "advancements.end.abyssium_plated_elytra": "Obtain Abyssium Plated Elytra",
+
+  "advancements.end.abyssium_hoe.title": "Your Sanity's End",
+  "advancements.end.abyssium_hoe": "Have an Abyssium Hoe in your inventory."
+}

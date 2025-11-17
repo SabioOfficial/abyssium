@@ -1,0 +1,37 @@
+{
+  "parent": "abyssium_mod:end/obtain_abyssium_ore",
+  "criteria": {
+    "abyssium_elytra": {
+      "conditions": {
+        "items": [
+          {
+            "items": "abyssium_mod:abyssium_plated_elytra"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "abyssium_mod:abyssium_plated_elytra",
+      "count": 1
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.end.abyssium_plated_elytra.title"
+    },
+    "description": {
+      "translate": "advancements.end.abyssium_plated_elytra"
+    }
+  },
+  "requirements": [
+    [
+      "abyssium_elytra"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

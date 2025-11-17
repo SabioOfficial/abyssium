@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:end/kill_dragon",
+  "criteria": {
+    "abyssium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["abyssium_mod:abyssium_ore"] }
+        ]
+      }
+    },
+    "abyssium_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": ["abyssium_mod:abyssium_shard"] }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    ["abyssium_ore", "abyssium_shard"]
+  ],
+  "display": {
+    "icon": {
+      "id": "abyssium_mod:abyssium_ore",
+      "count": 1
+    },
+    "title": {
+      "translate": "advancements.end.obtain_abyssium_ore.title",
+      "strikethrough": true
+    },
+    "description": {
+      "translate": "advancements.end.obtain_abyssium_ore"
+    }
+  },
+  "sends_telemetry_event": true
+}

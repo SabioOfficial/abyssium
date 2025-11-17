@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": "abyssium_mod:abyssium_ingot"
+    },
+    "result": {
+        "id": "abyssium_mod:block_of_abyssium",
+        "count": 1
+    }
+}

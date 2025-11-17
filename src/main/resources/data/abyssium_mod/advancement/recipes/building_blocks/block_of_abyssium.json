@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_abyssium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "abyssium_mod:abyssium_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "abyssium_mod:block_of_abyssium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_abyssium_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "abyssium_mod:block_of_abyssium"
+    ]
+  }
+}

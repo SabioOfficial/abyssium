@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "abyssium_1_21_8",
+  "version": "1.3.0",
+  "name": "Abyssium (1.21.8)",
+  "description": "Add new powerful ores and tools to The End!",
+  "authors": ["Sabio"],
+  "contact": {},
+  "license": "GPL-3.0",
+  "icon": "assets/abyssium_1_21_8/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.sabio.abyssium_1_21_8.client.Abyssium_1_21_8DataGenerator"
+    ],
+    "client": [
+      "net.sabio.abyssium_1_21_8.client.Abyssium_1_21_8Client"
+    ],
+    "main": [
+      "net.sabio.abyssium_1_21_8.Abyssium_1_21_8"
+    ]
+  },
+  "mixins": [
+    "abyssium_1_21_8.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.17.3",
+    "fabric": "*",
+    "minecraft": "1.21.8"
+  }
+}

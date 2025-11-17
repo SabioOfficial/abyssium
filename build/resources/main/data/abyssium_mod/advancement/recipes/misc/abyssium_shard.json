@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_abyssium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "abyssium_mod:abyssium_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "abyssium_mod:abyssium_shard"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe", "has_abyssium_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "abyssium_mod:abyssium_shard"
+    ]
+  }
+}

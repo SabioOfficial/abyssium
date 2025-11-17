@@ -1,0 +1,39 @@
+{
+  "minecraft:end/kill_dragon": {
+    "criteria": {
+      "killed_dragon": "2025-10-18 14:38:28 +0100"
+    },
+    "done": true
+  },
+  "abyssium_mod:recipes/misc/abyssium_shard": {
+    "criteria": {
+      "has_abyssium_ore": "2025-10-18 14:39:11 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-10-18 14:37:57 +0100"
+    },
+    "done": true
+  },
+  "minecraft:end/root": {
+    "criteria": {
+      "entered_end": "2025-10-18 14:38:28 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:snowy_plains": "2025-10-18 14:37:57 +0100"
+    },
+    "done": false
+  },
+  "abyssium_mod:recipes/misc/abyssium_ingot": {
+    "criteria": {
+      "has_abyssium_shard": "2025-10-18 14:39:02 +0100"
+    },
+    "done": true
+  },
+  "DataVersion": 4440
+}

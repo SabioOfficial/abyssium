@@ -1,0 +1,27 @@
+{
+  "minecraft:story/lava_bucket": {
+    "criteria": {
+      "lava_bucket": "2025-10-18 07:55:42 +0100"
+    },
+    "done": true
+  },
+  "abyssium_mod:recipes/misc/abyssium_shard": {
+    "criteria": {
+      "has_abyssium_ore": "2025-10-18 07:55:23 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-10-18 07:55:13 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:desert": "2025-10-18 07:55:14 +0100"
+    },
+    "done": false
+  },
+  "DataVersion": 4440
+}

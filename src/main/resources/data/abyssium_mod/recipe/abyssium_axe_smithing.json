@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "addition": "abyssium_mod:abyssium_ingot",
+    "base": "minecraft:netherite_axe",
+    "result": {
+        "id": "abyssium_mod:abyssium_axe"
+    },
+    "template": "abyssium_mod:abyssium_upgrade_smithing_template"
+}

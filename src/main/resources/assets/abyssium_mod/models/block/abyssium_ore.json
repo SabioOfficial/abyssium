@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "abyssium_mod:block/abyssium_ore_top",
+    "side": "abyssium_mod:block/abyssium_ore"
+  }
+}

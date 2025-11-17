@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "#": "minecraft:diamond",
+        "O": "minecraft:end_stone",
+        "A": "abyssium_mod:abyssium_upgrade_smithing_template"
+    },
+    "pattern": [
+        "#A#",
+        "#O#",
+        "###"
+    ],
+    "result": {
+        "count": 2,
+        "id": "abyssium_mod:abyssium_upgrade_smithing_template"
+    }
+}

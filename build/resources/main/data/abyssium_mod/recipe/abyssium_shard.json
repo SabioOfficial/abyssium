@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 400,
+  "experience": 6.0,
+  "ingredient": "abyssium_mod:abyssium_ore",
+  "result": {
+    "id": "abyssium_mod:abyssium_shard"
+  }
+}

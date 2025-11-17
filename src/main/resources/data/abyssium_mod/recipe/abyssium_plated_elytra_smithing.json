@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smithing_transform",
+    "addition": "abyssium_mod:abyssium_ingot",
+    "base": "minecraft:elytra",
+    "result": {
+        "id": "abyssium_mod:abyssium_plated_elytra"
+    },
+    "template": "abyssium_mod:abyssium_upgrade_smithing_template"
+}

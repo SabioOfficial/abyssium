@@ -1,0 +1,113 @@
+{
+  "minecraft:recipes/transportation/mangrove_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:end/obtain_abyssium_ore": {
+    "criteria": {
+      "abyssium_ore": "2025-10-27 19:29:34 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:recipes/misc/abyssium_shard": {
+    "criteria": {
+      "has_abyssium_ore": "2025-10-27 19:29:34 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2025-10-27 19:28:48 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2025-10-27 19:29:54 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:end/obtain_abyssium_plated_elytra": {
+    "criteria": {
+      "abyssium_elytra": "2025-10-27 19:30:01 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/cherry_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:end/abyssium_armor": {
+    "criteria": {
+      "abyssium_armor": "2025-10-27 19:29:52 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/pale_oak_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:river": "2025-10-27 19:29:06 +0000",
+      "minecraft:savanna": "2025-10-27 19:28:50 +0000",
+      "minecraft:plains": "2025-10-27 19:29:05 +0000"
+    },
+    "done": false
+  },
+  "minecraft:recipes/transportation/bamboo_raft": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:recipes/misc/abyssium_ingot": {
+    "criteria": {
+      "has_abyssium_shard": "2025-10-27 19:29:37 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2025-10-27 19:30:38 +0000"
+    },
+    "done": true
+  },
+  "DataVersion": 4435
+}
