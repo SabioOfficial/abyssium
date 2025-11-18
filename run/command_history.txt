@@ -1,7 +1,3 @@
-/give @a minecraft:acacia_leaves 64
-/give @a minecraft:firework_rocket 6400
-/time set day
-/give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:firework_rocket 64
 /give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:elytra
@@ -48,3 +44,7 @@
 /give @s minecraft:firework_rocket 64
 /give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:mace
+/give @s minecraft:firework_rocket 64
+/give @a minecraft:enchanted_golden_apple 64
+/give @s minecraft:elytra
+/give @s minecraft:firework_rocket 64

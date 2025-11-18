@@ -54,28 +54,9 @@ public class Abyssium_1_21_8 implements ModInitializer {
                 return false;
             }
 
-            if (tickElytra && !entity.getWorld().isClient) {
-                if (entity.age % 20 == 0) {
-                    Item captured = chest.getItem();
-                    chest.damage(1, entity, EquipmentSlot.CHEST);
-                    if (chest.isEmpty() && entity instanceof PlayerEntity player) {
-                        player.sendEquipmentBreakStatus(captured, EquipmentSlot.CHEST);
-                    }
-                }
-            }
-
             boolean isFlying = false;
             if (entity instanceof PlayerEntity player) {
-                try {
-                    isFlying = player.isGliding();
-                } catch (NoSuchMethodError ignored) {
-                    try {
-                        String poseName = entity.getPose().name();
-                        isFlying = poseName.equalsIgnoreCase("GLIDING") || poseName.toLowerCase(java.util.Locale.ROOT).contains("glid");
-                    } catch (Throwable ignored2) {
-                        isFlying = false;
-                    }
-                }
+                isFlying = player.isGliding();
             } else {
                 try {
                     String poseName = entity.getPose().name();
@@ -87,6 +68,16 @@ public class Abyssium_1_21_8 implements ModInitializer {
 
             if (!isFlying) {
                 return true;
+            }
+
+            if (tickElytra && !entity.getWorld().isClient) {
+                if (entity.age % 20 == 0) {
+                    Item captured = chest.getItem();
+                    chest.damage(1, entity, EquipmentSlot.CHEST);
+                    if (chest.isEmpty() && entity instanceof PlayerEntity player) {
+                        player.sendEquipmentBreakStatus(captured, EquipmentSlot.CHEST);
+                    }
+                }
             }
 
             Vec3d vel = entity.getVelocity();
