@@ -1,10 +1,4 @@
 {
-  "minecraft:story/deflect_arrow": {
-    "criteria": {
-      "deflected_projectile": "2025-10-25 15:27:26 +0100"
-    },
-    "done": true
-  },
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
       "unlock_right_away": "2025-10-25 15:25:39 +0100"
@@ -17,6 +11,30 @@
       "minecraft:plains": "2025-10-25 15:25:39 +0100"
     },
     "done": false
+  },
+  "minecraft:story/deflect_arrow": {
+    "criteria": {
+      "deflected_projectile": "2025-10-25 15:27:26 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2025-11-17 20:55:19 +0000"
+    },
+    "done": true
+  },
+  "minecraft:end/elytra": {
+    "criteria": {
+      "elytra": "2025-11-17 20:55:19 +0000"
+    },
+    "done": true
+  },
+  "abyssium_mod:end/obtain_abyssium_plated_elytra": {
+    "criteria": {
+      "abyssium_elytra": "2025-11-17 20:55:19 +0000"
+    },
+    "done": true
   },
   "DataVersion": 4440
 }

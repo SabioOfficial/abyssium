@@ -1,50 +1,50 @@
-/give @a minecraft:infested_stone
-/give @a minecraft:diamond_ore
-/time set day
-/weather clear
-/give @a abyssium_mod:abyssium_axe
-/give @a abyssium_mod:infested_end_stone
-/give @a minecraft:end_stone
-/give @a abyssium_mod:infested_end_stone
-/give @a minecraft:ancient_debris
-/summon minecraft:villager
-/summon minecraft:villager#
-/summon minecraft:villager
-/time set day
-/summon minecraft:villager
-/give @a minecraft:enchanted_golden_apple 61
-/summon minecraft:endermite
-/give @a minecraft:experience_bottle 64
-/time set day
-/effect give @a minecraft:absorption infinite 255
-/give @a minecraft:ender_pearl 64
-/effect give @a minecraft:resistance infinite 4
-/summon minecraft:warden
-/
-/effect clear @a minecraft:resistance
-/effect give @a minecraft:resistance infinite 3
-/effect give @a minecraft:absorption infinite 255
-/summon minecraft:warden
-/effect give @a minecraft:absorption infinite 255
-/effect give @a minecraft:levitation infinite 255
-/effect clear @a minecraft:levitation
-/give @a minecraft:firework_rocket 6400
-/effect give @a minecraft:levitation infinite 255
-/effect clear @a minecraft:levitation
-/give @a minecraft:totem_of_undying
-/give @a minecraft:creeper_spawn_egg 64
-/give @a mace
-/effect give @a minecraft:levitation infinite 255
-/effect clear @a minecraft:levitation
-/give @a minecraft:firework_rocket 6400
-/effect give @a minecraft:levitation infinite 255
-/effect clear @a minecraft:levitation
-/effect give @a minecraft:absorption infinite 255
-/summon wither
-/effect clear
-/give @a abyssium_mod:abyssium_plated_shield
-/give @a abyssium_mod:abyssium_plated_elytra
-/give @a abyssium_mod:abyssium_ingot
 /give @a minecraft:acacia_leaves 64
 /give @a minecraft:firework_rocket 6400
 /time set day
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:elytra
+/give @s minecraft:firework_rocket 64
+/give @s minecraft:elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/time set day
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s minecraft:elytra
+/give @s abyssium_mod:abyssium_chestplate
+/time set day
+/give @s abyssium_mod:abyssium_chestplate
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s abyssium_mod:abyssium_chestplate
+/give @s minecraft:elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/time set day
+/give @s minecraft:dirt
+/give @s minecraft:dirt 62
+/give @s minecraft:red_concrete 64
+/give @s abyssium_mod:abyssium_pickaxe
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s minecraft:elytra
+/give @s minecraft:enchanted_golden_apple 64
+/give @s minecraft:mace
+/give @s minecraft:elytra
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 64
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:mace

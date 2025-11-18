@@ -337,16 +337,27 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 14
+          "weight": 56
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:spire_armor_trim_smithing_template"
+          "name": "abyssium_mod:abyssium_ore",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spire_armor_trim_smithing_template",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "abyssium_mod:abyssium_shard",
+          "weight": 3
         },
         {
           "type": "minecraft:item",
           "name": "abyssium_mod:abyssium_upgrade_smithing_template",
-          "functions": []
+          "weight": 2
         }
       ],
       "rolls": 1

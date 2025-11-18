@@ -7,7 +7,7 @@
   "authors": ["Sabio"],
   "contact": {},
   "license": "GPL-3.0",
-  "icon": "assets/abyssium_1_21_8/icon.png",
+  "icon": "assets/abyssium_mod/icon.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
@@ -24,7 +24,7 @@
     "abyssium_1_21_8.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.17.3",
+    "fabricloader": ">=0.18.0",
     "fabric": "*",
     "minecraft": "1.21.8"
   }
