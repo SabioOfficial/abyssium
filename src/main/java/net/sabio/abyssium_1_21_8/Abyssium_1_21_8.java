@@ -9,11 +9,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
@@ -21,6 +23,8 @@ import net.sabio.abyssium_1_21_8.block.ModBlocks;
 import net.sabio.abyssium_1_21_8.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class Abyssium_1_21_8 implements ModInitializer {
     public static final String MOD_ID = "abyssium_mod";
@@ -70,13 +74,18 @@ public class Abyssium_1_21_8 implements ModInitializer {
                 return true;
             }
 
-            if (tickElytra && !entity.getWorld().isClient) {
-                if (entity.age % 20 == 0) {
-                    Item captured = chest.getItem();
-                    chest.damage(1, entity, EquipmentSlot.CHEST);
-                    if (chest.isEmpty() && entity instanceof PlayerEntity player) {
-                        player.sendEquipmentBreakStatus(captured, EquipmentSlot.CHEST);
-                    }
+            if (entity.age % 20 == 0) {
+                Item captured = chest.getItem();
+
+                chest.damage(1, entity, EquipmentSlot.CHEST);
+
+                if (!entity.getWorld().isClient && entity instanceof ServerPlayerEntity serverPlayer) {
+                    Pair<EquipmentSlot, ItemStack> pair = Pair.of(EquipmentSlot.CHEST, chest.copy());
+                    serverPlayer.networkHandler.sendPacket(new EntityEquipmentUpdateS2CPacket(entity.getId(), List.of(pair)));
+                }
+
+                if (chest.isEmpty() && entity instanceof PlayerEntity player) {
+                    player.sendEquipmentBreakStatus(captured, EquipmentSlot.CHEST);
                 }
             }
 

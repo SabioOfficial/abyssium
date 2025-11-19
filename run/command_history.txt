@@ -1,15 +1,6 @@
 /give @s minecraft:firework_rocket 64
 /give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:firework_rocket 64
-/give @s abyssium_mod:abyssium_plated_elytra
-/give @s minecraft:firework_rocket 64
-/time set day
-/give @s abyssium_mod:abyssium_plated_elytra
-/give @s minecraft:firework_rocket 64
-/give @s abyssium_mod:abyssium_plated_elytra
-/give @s minecraft:firework_rocket 64
-/give @s abyssium_mod:abyssium_plated_elytra
-/give @s minecraft:firework_rocket 64
 /give @s minecraft:elytra
 /give @s abyssium_mod:abyssium_chestplate
 /time set day
@@ -46,5 +37,14 @@
 /give @s minecraft:mace
 /give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:firework_rocket 640
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 6400
+/give @s minecraft:mace
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 6400
+/give @s minecraft:mace
+/give @s minecraft:firework_rocket 6400
+/give @s abyssium_mod:abyssium_plated_elytra
+/give @s minecraft:firework_rocket 6400
 /give @s abyssium_mod:abyssium_plated_elytra
 /give @s minecraft:firework_rocket 6400
