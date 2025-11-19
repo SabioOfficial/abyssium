@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "addition": "abyssium_mod:abyssium_ingot",
-    "base": "minecraft:netherite_shovel",
-    "result": {
-        "id": "abyssium_mod:abyssium_shovel"
-    },
-    "template": "abyssium_mod:abyssium_upgrade_smithing_template"
-}

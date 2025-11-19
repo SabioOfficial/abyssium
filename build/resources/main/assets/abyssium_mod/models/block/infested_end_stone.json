@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "abyssium_mod:block/infested_end_stone"
-  }
-}

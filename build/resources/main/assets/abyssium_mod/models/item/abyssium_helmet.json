@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "abyssium_mod:item/abyssium_helmet"
-  }
-}

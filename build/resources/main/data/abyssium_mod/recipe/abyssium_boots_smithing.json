@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "addition": "abyssium_mod:abyssium_ingot",
-    "base": "minecraft:netherite_boots",
-    "result": {
-        "id": "abyssium_mod:abyssium_boots"
-    },
-    "template": "abyssium_mod:abyssium_upgrade_smithing_template"
-}

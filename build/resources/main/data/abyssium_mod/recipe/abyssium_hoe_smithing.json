@@ -1,9 +1,0 @@
-{
-    "type": "minecraft:smithing_transform",
-    "addition": "abyssium_mod:abyssium_ingot",
-    "base": "minecraft:netherite_hoe",
-    "result": {
-        "id": "abyssium_mod:abyssium_hoe"
-    },
-    "template": "abyssium_mod:abyssium_upgrade_smithing_template"
-}
