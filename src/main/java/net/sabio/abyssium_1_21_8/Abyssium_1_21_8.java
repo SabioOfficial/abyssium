@@ -168,7 +168,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
 
                 chest.damage(1, entity, EquipmentSlot.CHEST);
 
-                if (!entity.getWorld().isClient && entity instanceof ServerPlayerEntity serverPlayer) {
+                if (!entity.getEntityWorld().isClient() && entity instanceof ServerPlayerEntity serverPlayer) {
                     Pair<EquipmentSlot, ItemStack> pair = Pair.of(EquipmentSlot.CHEST, chest.copy());
                     serverPlayer.networkHandler.sendPacket(new EntityEquipmentUpdateS2CPacket(entity.getId(), List.of(pair)));
                 }
@@ -218,7 +218,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
 
             entity.setVelocity(newX, newY, newZ);
 
-            if (!entity.getWorld().isClient && entity instanceof ServerPlayerEntity serverPlayer) {
+            if (!entity.getEntityWorld().isClient() && entity instanceof ServerPlayerEntity serverPlayer) {
                 serverPlayer.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(entity));
             }
 
