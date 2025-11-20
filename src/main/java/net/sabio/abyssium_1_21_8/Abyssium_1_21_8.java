@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.registry.RegistryKey;
@@ -24,7 +25,11 @@ import net.sabio.abyssium_1_21_8.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
+import java.util.function.Consumer;
 
 public class Abyssium_1_21_8 implements ModInitializer {
     public static final String MOD_ID = "abyssium_mod";
@@ -43,6 +48,83 @@ public class Abyssium_1_21_8 implements ModInitializer {
     public static final RegistryKey<PlacedFeature> END_STONE_INFESTED_KEY =
             RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of("abyssium_mod", "end_stone_infested"));
 
+    private static void damageElytra(ItemStack stack, LivingEntity holder) {
+        if (stack == null || stack.isEmpty()) return;
+
+        try {
+            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, EquipmentSlot.class);
+            m.invoke(stack, 1, holder, EquipmentSlot.CHEST);
+            if (stack.isEmpty() && holder instanceof PlayerEntity p) {
+                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+            }
+            return;
+        } catch (Throwable ignored) {/*stay empty my child*/}
+
+        try {
+            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, Consumer.class);
+            Consumer<LivingEntity> consumer = (LivingEntity e) -> {
+                if (e instanceof PlayerEntity p) p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+            };
+            m.invoke(stack, 1, holder, consumer);
+            return;
+        } catch (Throwable ignored) {/*stay empty my child*/}
+
+        try {
+            Method getD = stack.getClass().getMethod("getDamage");
+            Method setD = stack.getClass().getMethod("setDamage", int.class);
+            Object curObj = getD.invoke(stack);
+            int cur = (curObj instanceof Integer) ? (Integer) curObj : 0;
+            int next = cur + 1;
+            int max = stack.getMaxDamage();
+            setD.invoke(stack, next);
+            if (next >= max && holder instanceof PlayerEntity p) {
+                try {
+                    Method setCount = stack.getClass().getMethod("setCount", int.class);
+                    setCount.invoke(stack, 0);
+                } catch (Throwable ignored2) {}
+                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+            }
+            return;
+        } catch (Throwable ignored) {/*stay empty my child*/}
+    }
+
+    private static void sendEquipmentUpdatePacket(ServerPlayerEntity player, LivingEntity target, EquipmentSlot slot, ItemStack stackSnapshot) {
+        try {
+            Class<?> cls = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket");
+            Constructor<?> ctor = cls.getConstructor(int.class, List.class);
+            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
+            Object packet = ctor.newInstance(target.getId(), List.of(pair));
+            player.networkHandler.sendPacket((Packet<?>) packet);
+            return;
+        } catch (Throwable e) {/*stay empty my child*/}
+
+        try {
+            Class<?> alt = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentPacket"); // hypothetical alternative uwu
+            Constructor<?> ctorAlt = alt.getConstructor(int.class, List.class);
+            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
+            Object pkt = ctorAlt.newInstance(target.getId(), List.of(pair));
+            player.networkHandler.sendPacket((Packet<?>) pkt);
+            return;
+        } catch (Throwable ignored) {/*stay empty my child*/}
+    }
+
+//    private static void sendVelocityPacket(ServerPlayerEntity player, LivingEntity target) {
+//        try {
+//            Class<?> cls = Class.forName("net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket");
+//            Constructor<?> ctor = cls.getConstructor(LivingEntity.class);
+//            Object packet = ctor.newInstance(target);
+//            player.networkHandler.sendPacket((Packet<?>) packet);
+//            return;
+//        } catch (Throwable e) {/*stay empty my child*/}
+//
+//        try {
+//            Class<?> alt = Class.forName("net.minecraft.network.packet.s2c.play.EntityVelocityS2CPacket");
+//            Constructor<?> ctor = alt.getConstructor(LivingEntity.class);
+//            Object packet = ctor.newInstance(target);
+//            player.networkHandler.sendPacket((Packet<?>) packet);
+//        } catch (Throwable ignored) {}
+//    }
+
     @Override
     public void onInitialize() {
         ModItems.initialize();
@@ -60,7 +142,16 @@ public class Abyssium_1_21_8 implements ModInitializer {
 
             boolean isFlying = false;
             if (entity instanceof PlayerEntity player) {
-                isFlying = player.isGliding();
+                try {
+                    isFlying = player.isGliding();
+                } catch (NoSuchMethodError ignored) {
+                    try {
+                        String poseName = player.getPose().name();
+                        isFlying = poseName.equalsIgnoreCase("GLIDING") || poseName.toLowerCase(Locale.ROOT).contains("glid");
+                    } catch (Throwable ignored2) {
+                        isFlying = false;
+                    }
+                }
             } else {
                 try {
                     String poseName = entity.getPose().name();
@@ -70,9 +161,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
                 }
             }
 
-            if (!isFlying) {
-                return true;
-            }
+            if (!isFlying) return true; // wow optimized code omg
 
             if (entity.age % 20 == 0) {
                 Item captured = chest.getItem();
@@ -100,15 +189,10 @@ public class Abyssium_1_21_8 implements ModInitializer {
             double downwardCompFactor = 0.02;
 
             double vanillaTarget = curHor * multiplier;
-
-            if (curHor < 0.05 && startBoost > 0.0) {
-                vanillaTarget = Math.max(vanillaTarget, startBoost);
-            }
-
+            if (curHor < 0.05 && startBoost > 0.0) vanillaTarget = Math.max(vanillaTarget, startBoost); // wowie more optimized lines??!?!?!?!
             if (vanillaTarget > cap) vanillaTarget = cap;
 
             double newHor = curHor + (vanillaTarget - curHor) * lerpFactor;
-
             newHor *= horizontalDrag;
 
             double yawRad = Math.toRadians(entity.getYaw());
@@ -129,10 +213,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
             double newY = vel.y;
 
             double horDiff = newHor - curHor;
-            if (horDiff > 0.01) {
-                newY -= horDiff * downwardCompFactor;
-            }
-
+            if (horDiff > 0.01) newY -= horDiff * downwardCompFactor;
             if (newY > 1.0) newY = 1.0;
 
             entity.setVelocity(newX, newY, newZ);
