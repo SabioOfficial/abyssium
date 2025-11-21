@@ -4,14 +4,17 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.entity.*;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -21,6 +24,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.sabio.abyssium_1_21_8.block.ModBlocks;
+import net.sabio.abyssium_1_21_8.entity.EndermanSentryEntity;
 import net.sabio.abyssium_1_21_8.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +51,32 @@ public class Abyssium_1_21_8 implements ModInitializer {
 
     public static final RegistryKey<PlacedFeature> END_STONE_INFESTED_KEY =
             RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of("abyssium_mod", "end_stone_infested"));
+
+    public static <T extends Entity>EntityType<T> registerEntity(String namespace, String id, EntityType.Builder<T> type) {
+        RegistryKey<EntityType<?>> registryKey = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(namespace, id));
+        return Registry.register(Registries.ENTITY_TYPE, registryKey, type.build(registryKey));
+    }
+
+//    public static final EntityType<EndermanSentryEntity> ENDERMAN_SENTRY = Registry.register(
+//            Registries.ENTITY_TYPE,
+//            Identifier.of("abyssium_mod", "enderman_sentry"),
+//            EntityType.Builder.create(EndermanSentryEntity::new, SpawnGroup.MONSTER)
+//                    .dimensions(0.6F, 2.9F)
+//                    .eyeHeight(2.55F)
+//                    .passengerAttachments(2.80625F)
+//                    .maxTrackingRange(8)
+//                    .build()
+//    );
+
+    public static final EntityType<EndermanSentryEntity> ENDERMAN_SENTRY = registerEntity(
+            "abyssium_mod",
+            "enderman_sentry",
+            EntityType.Builder.create(EndermanSentryEntity::new, SpawnGroup.MONSTER)
+                .dimensions(0.6F, 2.9F)
+                .eyeHeight(2.55F)
+                .passengerAttachments(2.80625F)
+                .maxTrackingRange(8)
+    );
 
     private static void damageElytra(ItemStack stack, LivingEntity holder) {
         if (stack == null || stack.isEmpty()) return;
@@ -132,6 +162,8 @@ public class Abyssium_1_21_8 implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, ORE_SINGLE_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, ORE_CLUMP_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_DECORATION, END_STONE_INFESTED_KEY);
+
+        FabricDefaultAttributeRegistry.register(ENDERMAN_SENTRY, EndermanEntity.createEndermanAttributes());
 
         EntityElytraEvents.CUSTOM.register((LivingEntity entity, boolean tickElytra) -> {
             ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
