@@ -163,7 +163,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, ORE_CLUMP_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_DECORATION, END_STONE_INFESTED_KEY);
 
-        FabricDefaultAttributeRegistry.register(ENDERMAN_SENTRY, EndermanEntity.createEndermanAttributes());
+        FabricDefaultAttributeRegistry.register(ENDERMAN_SENTRY, EndermanSentryEntity.createEndermanSentryAttributes());
 
         EntityElytraEvents.CUSTOM.register((LivingEntity entity, boolean tickElytra) -> {
             ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
