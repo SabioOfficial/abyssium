@@ -6,6 +6,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
@@ -13,8 +14,17 @@ import java.util.EnumSet;
 public class EndermanSentryEntity extends HostileEntity {
     private boolean guarding = false;
 
+    private int guardTeleportCooldown;
+    private int attackTeleportCooldown;
+
+    public static final int GUARD_TELEPORT_TICKS = 20 * 30;
+    private static final int ATTACK_TELEPORT_TICKS = 20 * 7;
+
     public EndermanSentryEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
+        Random r = this.random;
+        this.guardTeleportCooldown = r.nextInt(GUARD_TELEPORT_TICKS);
+        this.attackTeleportCooldown = r.nextInt(ATTACK_TELEPORT_TICKS);
     }
 
     public static DefaultAttributeContainer.Builder createEndermanSentryAttributes() {
@@ -47,6 +57,78 @@ public class EndermanSentryEntity extends HostileEntity {
             this.guarding = false;
         } else if (!hasTarget && !this.guarding) {
             this.guarding = true;
+        }
+
+        if (!this.getWorld().isClient) {
+            if (this.guardTeleportCooldown > 0) this.guardTeleportCooldown--;
+            if (this.attackTeleportCooldown > 0) this.attackTeleportCooldown--;
+
+            if (this.guarding && this.guardTeleportCooldown <= 0 && this.getWorld().getRegistryKey() == World.END) {
+                attemptRandomTeleport(8.0D, 3);
+                this.guardTeleportCooldown = GUARD_TELEPORT_TICKS + this.random.nextInt(40);
+            }
+
+            if (hasTarget && this.attackTeleportCooldown <= 0 && this.getTarget() instanceof PlayerEntity target) {
+                if (target.isAlive() && target.getWorld() == this.getWorld()) {
+                    attemptTeleportNearTarget(target, 1.0D, 3);
+                    this.attackTeleportCooldown = ATTACK_TELEPORT_TICKS + this.random.nextInt(20);
+                }
+            }
+        }
+    }
+
+    private void attemptRandomTeleport(double radius, int attempts) {
+        double cx = this.getX();
+        double cy = this.getY();
+        double cz = this.getZ();
+        Random r = this.random;
+
+        for (int i = 0; i < attempts; i++) {
+            double dx = (r.nextDouble() * 2.0 - 1.0) * radius;
+            double dy = (r.nextDouble() * 2.0 - 1.0) * radius;
+            double dz = (r.nextDouble() * 2.0 - 1.0) * 2.0;
+
+            double tx = cz + dx;
+            double ty = Math.max(1.0D, cy + dy);
+            double tz = cx + dz;
+
+            if (this.teleportToSafe(tx, ty, tz)) {
+                return;
+            }
+        }
+    }
+
+    private void attemptTeleportNearTarget(PlayerEntity target, double nearRadius, int attempts) {
+        double px = target.getX();
+        double py = target.getY();
+        double pz = target.getZ();
+        Random r = this.random;
+
+        for (int i = 0; i < attempts; i++) {
+            double angle = r.nextDouble() * Math.PI * 2.0; // pie :yum:
+            double distance = nearRadius * (0.5 + r.nextDouble() * 0.5);
+            double offsetX = Math.cos(angle) * distance;
+            double offsetZ = Math.sin(angle) * distance;
+            double tx = px + offsetX;
+            double ty = py + 0.5D + r.nextDouble() * 1.5D;
+            double tz = pz + offsetZ;
+
+            if (this.teleportToSafe(tx, ty, tz)) {
+                return;
+            }
+        }
+    }
+
+    private boolean teleportToSafe(double x, double y, double z) {
+        try {
+            return this.teleport(x, y, z, true);
+        } catch (Throwable t) {
+            try {
+                this.refreshPositionAndAngles(x, y, z, this.getYaw(), this.getPitch());
+                return true;
+            } catch (Throwable ignored) {
+                return false;
+            }
         }
     }
 
