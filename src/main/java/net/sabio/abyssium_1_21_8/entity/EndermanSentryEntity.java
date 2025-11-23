@@ -20,7 +20,7 @@ public class EndermanSentryEntity extends HostileEntity {
     private int attackTeleportCooldown;
 
     public static final int GUARD_TELEPORT_TICKS = 20 * 30;
-    private static final int ATTACK_TELEPORT_TICKS = 20 * 7;
+    private static final int ATTACK_TELEPORT_TICKS = 20 * 20;
 
     private BlockPos homePos = null;
     private static final double MAX_HOME_DISTANCE = 50.0D;
@@ -43,9 +43,9 @@ public class EndermanSentryEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createEndermanSentryAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.MAX_HEALTH, 55.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.35F)
-                .add(EntityAttributes.ATTACK_DAMAGE, 8.5)
+                .add(EntityAttributes.MAX_HEALTH, 45.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.225F)
+                .add(EntityAttributes.ATTACK_DAMAGE, 7.5)
                 .add(EntityAttributes.FOLLOW_RANGE, 24.0)
                 .add(EntityAttributes.STEP_HEIGHT, 1.0);
     }
