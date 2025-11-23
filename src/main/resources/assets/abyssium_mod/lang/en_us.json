@@ -36,5 +36,7 @@
   "advancements.end.abyssium_plated_elytra": "Obtain Abyssium Plated Elytra",
 
   "advancements.end.abyssium_hoe.title": "Your Sanity's End",
-  "advancements.end.abyssium_hoe": "Have an Abyssium Hoe in your inventory."
+  "advancements.end.abyssium_hoe": "Have an Abyssium Hoe in your inventory.",
+
+  "entity.abyssium_mod.enderman_sentry": "Enderman Sentry"
 }

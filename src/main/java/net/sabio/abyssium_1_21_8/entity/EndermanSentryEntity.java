@@ -6,6 +6,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
@@ -20,11 +22,23 @@ public class EndermanSentryEntity extends HostileEntity {
     public static final int GUARD_TELEPORT_TICKS = 20 * 30;
     private static final int ATTACK_TELEPORT_TICKS = 20 * 7;
 
+    private BlockPos homePos = null;
+    private static final double MAX_HOME_DISTANCE = 50.0D;
+    private static final double MAX_HOME_DISTANCE_SQ = MAX_HOME_DISTANCE * MAX_HOME_DISTANCE;
+
     public EndermanSentryEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
         Random r = this.random;
         this.guardTeleportCooldown = r.nextInt(GUARD_TELEPORT_TICKS);
         this.attackTeleportCooldown = r.nextInt(ATTACK_TELEPORT_TICKS);
+    }
+
+    public void setHomePos(BlockPos pos) {
+        this.homePos = pos;
+    }
+
+    public BlockPos getHomePos() {
+        return this.homePos;
     }
 
     public static DefaultAttributeContainer.Builder createEndermanSentryAttributes() {
@@ -39,29 +53,35 @@ public class EndermanSentryEntity extends HostileEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2D, true));
         this.targetSelector.add(1, new SentryTargetGoal(this, 8.0D, 4.0D));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        super.initGoals();
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        boolean hasTarget = this.getTarget() != null;
-
-        if (hasTarget && this.guarding) {
-            this.guarding = false;
-        } else if (!hasTarget && !this.guarding) {
-            this.guarding = true;
-        }
-
         if (!this.getWorld().isClient) {
+            boolean hasTarget = this.getTarget() != null;
+
+            if (hasTarget && this.guarding) {
+                this.guarding = false;
+            } else if (!hasTarget && !this.guarding) {
+                this.guarding = true;
+            }
+
             if (this.guardTeleportCooldown > 0) this.guardTeleportCooldown--;
             if (this.attackTeleportCooldown > 0) this.attackTeleportCooldown--;
+
+            if (this.homePos != null) {
+                double homeDistSq = this.squaredDistanceTo(this.homePos.getX() + 0.5, this.homePos.getY(), this.homePos.getZ() + 0.5);
+                if (homeDistSq > MAX_HOME_DISTANCE_SQ) {
+                    this.getNavigation().startMovingTo(this.homePos.getX() + 0.5, this.homePos.getY(), this.homePos.getZ() + 0.5, 1.0D);
+                }
+            }
 
             if (this.guarding && this.guardTeleportCooldown <= 0 && this.getWorld().getRegistryKey() == World.END) {
                 attemptRandomTeleport(8.0D, 3);
@@ -86,11 +106,19 @@ public class EndermanSentryEntity extends HostileEntity {
         for (int i = 0; i < attempts; i++) {
             double dx = (r.nextDouble() * 2.0 - 1.0) * radius;
             double dy = (r.nextDouble() * 2.0 - 1.0) * radius;
-            double dz = (r.nextDouble() * 2.0 - 1.0) * 2.0;
+            double dz = (r.nextDouble() * 2.0 - 1.0) * radius;
 
-            double tx = cz + dx;
+            double tx = cx + dx;
             double ty = Math.max(1.0D, cy + dy);
-            double tz = cx + dz;
+            double tz = cz + dz;
+
+            if (this.homePos != null) {
+                double dxh = tx - (this.homePos.getX() + 0.5);
+                double dyh = ty - (this.homePos.getY() + 0.5);
+                double dzh = tz - (this.homePos.getZ() + 0.5);
+                double distSq = dxh * dxh + dyh * dyh + dzh * dzh;
+                if (distSq > MAX_HOME_DISTANCE_SQ) continue;
+            }
 
             if (this.teleportToSafe(tx, ty, tz)) {
                 return;
@@ -105,13 +133,21 @@ public class EndermanSentryEntity extends HostileEntity {
         Random r = this.random;
 
         for (int i = 0; i < attempts; i++) {
-            double angle = r.nextDouble() * Math.PI * 2.0; // pie :yum:
+            double angle = r.nextDouble() * Math.PI * 2.0;
             double distance = nearRadius * (0.5 + r.nextDouble() * 0.5);
             double offsetX = Math.cos(angle) * distance;
             double offsetZ = Math.sin(angle) * distance;
             double tx = px + offsetX;
             double ty = py + 0.5D + r.nextDouble() * 1.5D;
             double tz = pz + offsetZ;
+
+            if (this.homePos != null) {
+                double dxh = tx - (this.homePos.getX() + 0.5);
+                double dyh = ty - (this.homePos.getY() + 0.5);
+                double dzh = tz - (this.homePos.getZ() + 0.5);
+                double distSq = dxh * dxh + dyh * dyh + dzh * dzh;
+                if (distSq > MAX_HOME_DISTANCE_SQ) continue;
+            }
 
             if (this.teleportToSafe(tx, ty, tz)) {
                 return;
@@ -120,15 +156,44 @@ public class EndermanSentryEntity extends HostileEntity {
     }
 
     private boolean teleportToSafe(double x, double y, double z) {
-        try {
-            return this.teleport(x, y, z, true);
-        } catch (Throwable t) {
-            try {
-                this.refreshPositionAndAngles(x, y, z, this.getYaw(), this.getPitch());
-                return true;
-            } catch (Throwable ignored) {
-                return false;
-            }
+        return this.teleport(x, y, z, true);
+    }
+
+    public void addAdditionalSaveData(NbtCompound nbt) {
+        if (this.homePos != null) {
+            nbt.putInt("HomeX", this.homePos.getX());
+            nbt.putInt("HomeY", this.homePos.getY());
+            nbt.putInt("HomeZ", this.homePos.getZ());
+        }
+    }
+
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        if (this.homePos != null) {
+            nbt.putInt("HomeX", this.homePos.getX());
+            nbt.putInt("HomeY", this.homePos.getY());
+            nbt.putInt("HomeZ", this.homePos.getZ());
+        }
+    }
+
+    public void readAdditionalSaveData(NbtCompound nbt) {
+        if (nbt.contains("HomeX")) {
+            int x = nbt.getInt("HomeX", 0);
+            int y = nbt.getInt("HomeY", 0);
+            int z = nbt.getInt("HomeZ", 0);
+            this.homePos = new BlockPos(x, y, z);
+        } else {
+            this.homePos = null;
+        }
+    }
+
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        if (nbt.contains("HomeX")) {
+            int x = nbt.getInt("HomeX", 0);
+            int y = nbt.getInt("HomeY", 0);
+            int z = nbt.getInt("HomeZ", 0);
+            this.homePos = new BlockPos(x, y, z);
+        } else {
+            this.homePos = null;
         }
     }
 
@@ -155,7 +220,7 @@ public class EndermanSentryEntity extends HostileEntity {
             if (this.owner.getTarget() != null) return false;
             var box = this.owner.getBoundingBox().expand(this.sightRange, 2.0D, this.sightRange);
             for (PlayerEntity player : this.owner.getWorld().getEntitiesByClass(PlayerEntity.class, box, p -> !p.isSpectator())) {
-                if (player.isSpectator()) continue;
+                if (player.isSpectator() || player.isCreative()) continue;
                 double dSq = this.owner.squaredDistanceTo(player);
                 if (dSq <= this.listenRange * this.listenRange) {
                     if (player.getVelocity().lengthSquared() < 0.01D) {

@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.*;
-import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,7 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import net.sabio.abyssium_1_21_8.block.ModBlocks;
 import net.sabio.abyssium_1_21_8.entity.EndermanSentryEntity;
 import net.sabio.abyssium_1_21_8.item.ModItems;
+import net.sabio.abyssium_1_21_8.world.EndCitySentryChunkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,65 +78,65 @@ public class Abyssium_1_21_8 implements ModInitializer {
                 .maxTrackingRange(8)
     );
 
-    private static void damageElytra(ItemStack stack, LivingEntity holder) {
-        if (stack == null || stack.isEmpty()) return;
+//    private static void damageElytra(ItemStack stack, LivingEntity holder) {
+//        if (stack == null || stack.isEmpty()) return;
+//
+//        try {
+//            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, EquipmentSlot.class);
+//            m.invoke(stack, 1, holder, EquipmentSlot.CHEST);
+//            if (stack.isEmpty() && holder instanceof PlayerEntity p) {
+//                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+//            }
+//            return;
+//        } catch (Throwable ignored) {/*stay empty my child*/}
+//
+//        try {
+//            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, Consumer.class);
+//            Consumer<LivingEntity> consumer = (LivingEntity e) -> {
+//                if (e instanceof PlayerEntity p) p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+//            };
+//            m.invoke(stack, 1, holder, consumer);
+//            return;
+//        } catch (Throwable ignored) {/*stay empty my child*/}
+//
+//        try {
+//            Method getD = stack.getClass().getMethod("getDamage");
+//            Method setD = stack.getClass().getMethod("setDamage", int.class);
+//            Object curObj = getD.invoke(stack);
+//            int cur = (curObj instanceof Integer) ? (Integer) curObj : 0;
+//            int next = cur + 1;
+//            int max = stack.getMaxDamage();
+//            setD.invoke(stack, next);
+//            if (next >= max && holder instanceof PlayerEntity p) {
+//                try {
+//                    Method setCount = stack.getClass().getMethod("setCount", int.class);
+//                    setCount.invoke(stack, 0);
+//                } catch (Throwable ignored2) {}
+//                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
+//            }
+//            return;
+//        } catch (Throwable ignored) {/*stay empty my child*/}
+//    }
 
-        try {
-            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, EquipmentSlot.class);
-            m.invoke(stack, 1, holder, EquipmentSlot.CHEST);
-            if (stack.isEmpty() && holder instanceof PlayerEntity p) {
-                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
-            }
-            return;
-        } catch (Throwable ignored) {/*stay empty my child*/}
-
-        try {
-            Method m = stack.getClass().getMethod("damage", int.class, LivingEntity.class, Consumer.class);
-            Consumer<LivingEntity> consumer = (LivingEntity e) -> {
-                if (e instanceof PlayerEntity p) p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
-            };
-            m.invoke(stack, 1, holder, consumer);
-            return;
-        } catch (Throwable ignored) {/*stay empty my child*/}
-
-        try {
-            Method getD = stack.getClass().getMethod("getDamage");
-            Method setD = stack.getClass().getMethod("setDamage", int.class);
-            Object curObj = getD.invoke(stack);
-            int cur = (curObj instanceof Integer) ? (Integer) curObj : 0;
-            int next = cur + 1;
-            int max = stack.getMaxDamage();
-            setD.invoke(stack, next);
-            if (next >= max && holder instanceof PlayerEntity p) {
-                try {
-                    Method setCount = stack.getClass().getMethod("setCount", int.class);
-                    setCount.invoke(stack, 0);
-                } catch (Throwable ignored2) {}
-                p.sendEquipmentBreakStatus(stack.getItem(), EquipmentSlot.CHEST);
-            }
-            return;
-        } catch (Throwable ignored) {/*stay empty my child*/}
-    }
-
-    private static void sendEquipmentUpdatePacket(ServerPlayerEntity player, LivingEntity target, EquipmentSlot slot, ItemStack stackSnapshot) {
-        try {
-            Class<?> cls = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket");
-            Constructor<?> ctor = cls.getConstructor(int.class, List.class);
-            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
-            Object packet = ctor.newInstance(target.getId(), List.of(pair));
-            player.networkHandler.sendPacket((Packet<?>) packet);
-            return;
-        } catch (Throwable e) {/*stay empty my child*/}
-
-        try {
-            Class<?> alt = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentPacket"); // hypothetical alternative uwu
-            Constructor<?> ctorAlt = alt.getConstructor(int.class, List.class);
-            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
-            Object pkt = ctorAlt.newInstance(target.getId(), List.of(pair));
-            player.networkHandler.sendPacket((Packet<?>) pkt);
-            return;
-        } catch (Throwable ignored) {/*stay empty my child*/}
-    }
+//    private static void sendEquipmentUpdatePacket(ServerPlayerEntity player, LivingEntity target, EquipmentSlot slot, ItemStack stackSnapshot) {
+//        try {
+//            Class<?> cls = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket");
+//            Constructor<?> ctor = cls.getConstructor(int.class, List.class);
+//            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
+//            Object packet = ctor.newInstance(target.getId(), List.of(pair));
+//            player.networkHandler.sendPacket((Packet<?>) packet);
+//            return;
+//        } catch (Throwable e) {/*stay empty my child*/}
+//
+//        try {
+//            Class<?> alt = Class.forName("net.minecraft.network.packet.s2c.play.EntityEquipmentPacket"); // hypothetical alternative uwu
+//            Constructor<?> ctorAlt = alt.getConstructor(int.class, List.class);
+//            Pair<EquipmentSlot, ItemStack> pair = Pair.of(slot, stackSnapshot);
+//            Object pkt = ctorAlt.newInstance(target.getId(), List.of(pair));
+//            player.networkHandler.sendPacket((Packet<?>) pkt);
+//            return;
+//        } catch (Throwable ignored) {/*stay empty my child*/}
+//    }
 
 //    private static void sendVelocityPacket(ServerPlayerEntity player, LivingEntity target) {
 //        try {
@@ -159,6 +159,7 @@ public class Abyssium_1_21_8 implements ModInitializer {
     public void onInitialize() {
         ModItems.initialize();
         ModBlocks.initialize();
+        EndCitySentryChunkHandler.register();
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, ORE_SINGLE_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, ORE_CLUMP_KEY);
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_DECORATION, END_STONE_INFESTED_KEY);
